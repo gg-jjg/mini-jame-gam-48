@@ -43,28 +43,28 @@ func get_movement_angle(initial_point: Vector2, current_point: Vector2, recent_p
 	#:return: The angle in degrees if movement exceeds threshold, else null.
 	
 	# Calculate total movement distance from initial point
-		var distance = initial_point.distance_to(current_point)
+	var distance = initial_point.distance_to(current_point)
 
-		if distance < distance_threshold:
-			# Not enough movement yet
-			return null
+	if distance < distance_threshold:
+		# Not enough movement yet
+		return null
 
-		# Estimate velocity using recent points (if available)
-		if recent_points.size() >= 2:
-			var start = recent_points[0]
-			var end = recent_points[-1]
-			var delta_time = recent_points.size()  # Approximate, or you can include timestamps
-			var velocity = (end - start).length() / delta_time if delta_time > 0 else 0
-		else:
-			# Fallback if no recent points
-			var velocity = 1  # Default to 1 for simplicity
+	# Estimate velocity using recent points (if available)
+	if recent_points.size() >= 2:
+		var start = recent_points[0]
+		var end = recent_points[-1]
+		var delta_time = recent_points.size()  # Approximate, or you can include timestamps
+		var velocity = (end - start).length() / delta_time if delta_time > 0 else 0
+	else:
+		# Fallback if no recent points
+		var velocity = 1  # Default to 1 for simplicity
 
-		# Calculate the vector from initial to current
-		var vector = current_point - initial_point
-		var angle_rad = atan2(vector.y, vector.x)
-		var angle_deg = rad_to_deg(angle_rad)
+	# Calculate the vector from initial to current
+	var vector = current_point - initial_point
+	var angle_rad = atan2(vector.y, vector.x)
+	var angle_deg = rad_to_deg(angle_rad)
 
-		return angle_deg
+	return angle_deg
 
 func draw_points(points_array):
 	line_2d.clear_points()
