@@ -9,5 +9,5 @@ var gesture_map = {
 }
 
 func set_gesture(val):
-	print("Setting the gesture: ", val)
 	gesture = val
+	#print("Setting the gesture: ", gesture)
