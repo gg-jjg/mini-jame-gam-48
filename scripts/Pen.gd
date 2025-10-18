@@ -1,43 +1,46 @@
 extends Node2D
 
-var drawing_points = []
+var points = []
 var last_point = Vector2.ZERO
 const DISTANCE_THRESHOLD = 100.0
 @onready var line = $Line2D
 
 func _input(event):
 	if Input.is_action_just_pressed("write"):
-		drawing_points.clear() # Clear previous points on new write
-		print('Write: start')
+		points.clear() # Clear previous points on new write
 		last_point = event.position
-		drawing_points.append(last_point)
+		points.append(last_point)
+		#print('Write: start')
 	
 	elif event is InputEventMouseMotion and Input.is_action_pressed("write"):
 		# Track mouse movement while writing
 		var distance = last_point.distance_to(event.position)
 
 		if distance > DISTANCE_THRESHOLD:
-			print("  Captured point")
 			last_point = event.position
-			drawing_points.append(last_point)
+			points.append(last_point)
+			#print("  Captured point")
 	
 	elif Input.is_action_just_released("write"):
+		points.append(event.position)
 		
-		print('Write: end')
-		drawing_points.append(event.position)
-		
+		var three_points = get_three_points(points)
+		draw_three_points(three_points)
+		#print('Write: end')
 		#debug_print_points()
-		draw_three_points(drawing_points)
 
-func draw_three_points(points_array):
+func get_three_points(points_array):
+	var mid_point = get_middle_point(points)
+	var three_points = [points_array[0], mid_point, points_array[len(points_array) - 1]]
+	
+	return three_points
+
+func draw_three_points(points):
 	#Draws a line connecting the start point, the midpoint, and the end point of the given points array.
-	
-	var mid_point = get_middle_point(points_array)
-	
 	line.clear_points() # Clear previous line on new write
-	line.add_point(points_array[0])
-	line.add_point(mid_point)
-	line.add_point(points_array[len(points_array) - 1])
+	
+	for point in points:
+		line.add_point(point)
 
 func get_middle_point(points_array):
 	var length = len(points_array)
@@ -56,7 +59,7 @@ func get_middle_point(points_array):
 	return middle_point
 
 func debug_print_points():
-	print("Start point: ", drawing_points[0])
-	for i in range(1, drawing_points.size() - 1):
-		print(drawing_points[i])
-	print("  End point: ", drawing_points[-1])
+	print("Start point: ", points[0])
+	for i in range(1, points.size() - 1):
+		print(points[i])
+	print("  End point: ", points[-1])
