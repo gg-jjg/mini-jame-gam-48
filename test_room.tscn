@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbkinmik6lx5w"]
+[gd_scene load_steps=5 format=3 uid="uid://cbkinmik6lx5w"]
 
+[ext_resource type="PackedScene" uid="uid://c7f75ymb1g8nc" path="res://scenes/pen.tscn" id="1_o251a"]
+[ext_resource type="PackedScene" uid="uid://c7wd6p53apsik" path="res://scenes/game_manager.tscn" id="1_qjn2x"]
 [ext_resource type="PackedScene" uid="uid://c3wvh0c85u3r6" path="res://Player.tscn" id="1_xew7u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn0kp"]
 size = Vector2(1103, 25)
 
 [node name="TestRoom" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("1_qjn2x")]
+unique_name_in_owner = true
+
+[node name="Pen" parent="." instance=ExtResource("1_o251a")]
 
 [node name="Area2D3" type="StaticBody2D" parent="."]
 position = Vector2(560, 14)

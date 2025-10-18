@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var game_manager = %GameManager
 
 @onready var grav_dir:Vector2 = Vector2.DOWN
 @onready var grav_const:float = 9.8
@@ -58,33 +59,34 @@ func _physics_process(delta):
 		#print ("nope")
 
 func _process(delta):
+	var gm_gravity = game_manager.get_gravity()
 	
-	if Input.is_action_just_pressed("ui_up"):
+	if gm_gravity == 4:
 		if(lastSaved[0] == Vector2.DOWN):
 			gravity = -gravity
 		grav_dir = Vector2.UP
 		lastSaved[0] = grav_dir
 		gravity += 1
 
-	if Input.is_action_just_pressed("ui_down"):
+	if gm_gravity == 0:
 		if(lastSaved[0] == Vector2.UP):
 			gravity = -gravity
 		grav_dir = Vector2.DOWN
 		lastSaved[0] = grav_dir
 		gravity += 1
 
-	if Input.is_action_just_pressed("ui_left"):
+	if gm_gravity == 2:
 		if(lastSaved[1] == Vector2.RIGHT):
 			gravity2 = -gravity2
 		grav_dir = Vector2.LEFT
 		lastSaved[1] = grav_dir
 		gravity2 += 1
 
-	if Input.is_action_just_pressed("ui_right"):
+	if gm_gravity == 6:
 		if(lastSaved[1] == Vector2.LEFT):
 			gravity2 = -gravity2
 		grav_dir = Vector2.RIGHT
 		lastSaved[1] = grav_dir
 		gravity2 += 1
 
-	print(gravity,gravity2)
+	#print(gravity,gravity2)
