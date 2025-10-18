@@ -1,10 +1,13 @@
 extends Node
 
-var gravity = "V"
+var gesture = "V"
+var gesture_map = {
+	"Λ": Vector2.UP,
+	"V": Vector2.DOWN,
+	"<": Vector2.LEFT,
+	">": Vector2.RIGHT
+}
 
-func set_gravity(val):
-	print("Setting the gravity: ", val)
-	gravity = val
-
-func get_gravity():
-	return gravity
+func set_gesture(val):
+	print("Setting the gesture: ", val)
+	gesture = val

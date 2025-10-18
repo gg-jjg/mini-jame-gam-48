@@ -25,8 +25,7 @@ func _input(event):
 		points.append(event.position)
 		
 		var three_points = get_three_points(points)
-		var gesture = detect_gesture(three_points)
-		GameManager.set_gravity(gesture)
+		GameManager.set_gesture(detect_gesture(three_points))
 		
 		draw_three_points(three_points)
 		#print('Write: end')
