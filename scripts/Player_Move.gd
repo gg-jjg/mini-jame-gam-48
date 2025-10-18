@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @onready var grav_dir:Vector2 = Vector2.DOWN
 @onready var grav_const:float = 9.8
-@onready var grav_scale:float = 100
+@onready var grav_scale:float = 10
 @onready var gravity:float = 0
 @onready var gravity2:float = 0
 @onready var lastSaved = [Vector2.ZERO, Vector2.ZERO]
