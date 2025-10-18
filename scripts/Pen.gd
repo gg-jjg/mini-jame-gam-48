@@ -25,6 +25,8 @@ func _input(event):
 		points.append(event.position)
 		
 		var three_points = get_three_points(points)
+		var gesture = detect_gesture(three_points)
+		
 		draw_three_points(three_points)
 		#print('Write: end')
 		#debug_print_points()
@@ -35,11 +37,35 @@ func get_three_points(points_array):
 	
 	return three_points
 
-func draw_three_points(points):
+func detect_gesture(points_array):
+	var gesture = null
+	var initial_point = points_array[0].lerp(points_array[2], 0.50)
+	var terminal_point = points_array[1]
+	
+	var vector = terminal_point - initial_point
+	var angle_degrees = rad_to_deg(atan2(vector.y, vector.x))
+	
+	# Normalize the degrees
+	if angle_degrees < 0:
+		angle_degrees += 360
+	
+	if angle_degrees >= 45 and angle_degrees < 135:
+		gesture = "V"
+	elif angle_degrees >= 135 and angle_degrees < 225:
+		gesture = "<"
+	elif angle_degrees >= 225 and angle_degrees < 315:
+		gesture = "Λ"
+	else:
+		gesture = ">"
+	
+	print("Gesture detected: ", gesture)
+	return gesture
+
+func draw_three_points(points_array):
 	#Draws a line connecting the start point, the midpoint, and the end point of the given points array.
 	line.clear_points() # Clear previous line on new write
 	
-	for point in points:
+	for point in points_array:
 		line.add_point(point)
 
 func get_middle_point(points_array):
