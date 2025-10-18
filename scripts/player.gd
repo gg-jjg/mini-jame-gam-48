@@ -2,18 +2,18 @@ extends CharacterBody2D
 
 var GRAVITY:float = 9.8
 var SCALE:float = 10
+var SPEED = 500
 
 var grav_vect:Vector2 = Vector2.DOWN
 var speed_x:float = 0
 var speed_y:float = 0
 var last_saved = [Vector2.ZERO, Vector2.ZERO]
-var speed = 500
 
 @onready var ray = $RayCast2D
 #@onready var grounded:bool = false # Does this need to exist?
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	ray.target_position = grav_vect*70
 	up_direction=-grav_vect
 
@@ -39,7 +39,7 @@ func _physics_process(delta):
 	velocity = Vector2(vel_x,vel_y)
 	move_and_slide()
 
-func _process(delta):
+func _process(_delta):
 	var gesture = GameManager.gesture
 	grav_vect = GameManager.gesture_map[gesture]
 	
