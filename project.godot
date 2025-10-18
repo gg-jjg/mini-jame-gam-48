@@ -15,6 +15,11 @@ run/main_scene="res://scenes/test_room.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Pen="*res://scenes/pen.tscn"
+GameManager="*res://scenes/game_manager.tscn"
+
 [dotnet]
 
 project/assembly_name="Mini-jame-gam-48"

@@ -1,11 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://e3bwpbu4515l"]
+[gd_scene load_steps=5 format=3 uid="uid://e3bwpbu4515l"]
 
-[ext_resource type="PackedScene" uid="uid://c7wd6p53apsik" path="res://scenes/game_manager.tscn" id="1_e2aa5"]
-[ext_resource type="PackedScene" uid="uid://c7f75ymb1g8nc" path="res://scenes/pen.tscn" id="1_g5t02"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_r587t"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_r03is"]
+normal = Vector2(-1, 0)
+distance = -1152.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6sn5s"]
+distance = -652.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iswv8"]
+normal = Vector2(1, 0)
 
 [node name="Level" type="Node2D"]
 
-[node name="GameManager" parent="." instance=ExtResource("1_e2aa5")]
-unique_name_in_owner = true
+[node name="WorldBoundaries" type="Node" parent="."]
 
-[node name="Pen" parent="." instance=ExtResource("1_g5t02")]
+[node name="North" type="StaticBody2D" parent="WorldBoundaries"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/North"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_r587t")
+
+[node name="East" type="StaticBody2D" parent="WorldBoundaries"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/East"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_r03is")
+
+[node name="South" type="StaticBody2D" parent="WorldBoundaries"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/South"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_6sn5s")
+
+[node name="West" type="StaticBody2D" parent="WorldBoundaries"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/West"]
+visible = false
+shape = SubResource("WorldBoundaryShape2D_iswv8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+offset = Vector2(576, 324)

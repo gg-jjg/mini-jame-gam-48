@@ -1,6 +1,6 @@
 extends Node
 
-var gravity = 0
+var gravity = "V"
 
 func set_gravity(val):
 	print("Setting the gravity: ", val)

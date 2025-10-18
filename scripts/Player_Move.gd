@@ -1,27 +1,18 @@
 extends CharacterBody2D
-@onready var game_manager = %GameManager
 
-@onready var grav_dir:Vector2 = Vector2.DOWN
-@onready var grav_const:float = 9.8
-@onready var grav_scale:float = 10
-@onready var gravity:float = 0
-@onready var gravity2:float = 0
-@onready var lastSaved = [Vector2.ZERO, Vector2.ZERO]
+var grav_dir:Vector2 = Vector2.DOWN
+var grav_const:float = 9.8
+var grav_scale:float = 10
+var gravity:float = 0
+var gravity2:float = 0
+var lastSaved = [Vector2.ZERO, Vector2.ZERO]
+var speed = 500
+
 #@onready var grounded:bool = false
 @onready var ray = $RayCast2D
-var speed = 500
-var inputs = {"right": Vector2.RIGHT, "left": Vector2.LEFT}
 
 func _ready():
 	up_direction=Vector2.UP
-	
-	
-func get_input():
-	
-	for dir in inputs.keys():
-		if Input.is_action_pressed(dir):
-			return inputs.get(dir)*speed
-	return Vector2.ZERO
 
 func _physics_process(delta):
 	up_direction=-grav_dir
@@ -59,30 +50,30 @@ func _physics_process(delta):
 		#print ("nope")
 
 func _process(delta):
-	var gm_gravity = game_manager.get_gravity()
+	var gm_gravity = GameManager.get_gravity()
 	
-	if gm_gravity == 4:
+	if gm_gravity == "Λ":
 		if(lastSaved[0] == Vector2.DOWN):
 			gravity = -gravity
 		grav_dir = Vector2.UP
 		lastSaved[0] = grav_dir
 		gravity += 1
 
-	if gm_gravity == 0:
+	if gm_gravity == "V":
 		if(lastSaved[0] == Vector2.UP):
 			gravity = -gravity
 		grav_dir = Vector2.DOWN
 		lastSaved[0] = grav_dir
 		gravity += 1
 
-	if gm_gravity == 2:
+	if gm_gravity == "<":
 		if(lastSaved[1] == Vector2.RIGHT):
 			gravity2 = -gravity2
 		grav_dir = Vector2.LEFT
 		lastSaved[1] = grav_dir
 		gravity2 += 1
 
-	if gm_gravity == 6:
+	if gm_gravity == ">":
 		if(lastSaved[1] == Vector2.LEFT):
 			gravity2 = -gravity2
 		grav_dir = Vector2.RIGHT

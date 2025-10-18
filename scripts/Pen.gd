@@ -1,5 +1,4 @@
 extends Node2D
-@onready var game_manager = %GameManager
 
 var points = []
 var last_point = Vector2.ZERO
@@ -27,7 +26,7 @@ func _input(event):
 		
 		var three_points = get_three_points(points)
 		var gesture = detect_gesture(three_points)
-		game_manager.set_gravity(gesture)
+		GameManager.set_gravity(gesture)
 		
 		draw_three_points(three_points)
 		#print('Write: end')
@@ -52,13 +51,13 @@ func detect_gesture(points_array):
 		angle_degrees += 360
 	
 	if angle_degrees >= 45 and angle_degrees < 135:
-		gesture = 0
+		gesture = "V"
 	elif angle_degrees >= 135 and angle_degrees < 225:
-		gesture = 2
+		gesture = "<"
 	elif angle_degrees >= 225 and angle_degrees < 315:
-		gesture = 4
+		gesture = "Λ"
 	else:
-		gesture = 6
+		gesture = ">"
 	
 	#print("Gesture detected: ", gesture)
 	return gesture
