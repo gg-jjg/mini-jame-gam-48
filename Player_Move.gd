@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var grav_scale:float = 100
 @onready var gravity:float = 0
 @onready var gravity2:float = 0
+@onready var lastSaved = [Vector2.ZERO, Vector2.ZERO]
 #@onready var grounded:bool = false
 @onready var ray = $RayCast2D
 var speed = 500
@@ -57,28 +58,33 @@ func _physics_process(delta):
 		#print ("nope")
 
 func _process(delta):
+	
 	if Input.is_action_just_pressed("ui_up"):
-		if(grav_dir == Vector2.DOWN):
+		if(lastSaved[0] == Vector2.DOWN):
 			gravity = -gravity
 		grav_dir = Vector2.UP
+		lastSaved[0] = grav_dir
 		gravity += 1
 
 	if Input.is_action_just_pressed("ui_down"):
-		if(grav_dir == Vector2.UP):
+		if(lastSaved[0] == Vector2.UP):
 			gravity = -gravity
 		grav_dir = Vector2.DOWN
+		lastSaved[0] = grav_dir
 		gravity += 1
 
 	if Input.is_action_just_pressed("ui_left"):
-		if(grav_dir == Vector2.RIGHT):
+		if(lastSaved[1] == Vector2.RIGHT):
 			gravity2 = -gravity2
 		grav_dir = Vector2.LEFT
+		lastSaved[1] = grav_dir
 		gravity2 += 1
 
 	if Input.is_action_just_pressed("ui_right"):
-		if(grav_dir == Vector2.LEFT):
+		if(lastSaved[1] == Vector2.LEFT):
 			gravity2 = -gravity2
 		grav_dir = Vector2.RIGHT
+		lastSaved[1] = grav_dir
 		gravity2 += 1
 
 	print(gravity,gravity2)
