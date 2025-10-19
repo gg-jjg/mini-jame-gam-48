@@ -1,11 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bso7ct61d13ir"]
+[gd_scene load_steps=10 format=3 uid="uid://bso7ct61d13ir"]
 
 [ext_resource type="PackedScene" uid="uid://c7f75ymb1g8nc" path="res://scenes/pen.tscn" id="1_o251a"]
 [ext_resource type="PackedScene" uid="uid://c7wd6p53apsik" path="res://scenes/game_manager.tscn" id="1_qjn2x"]
 [ext_resource type="PackedScene" uid="uid://c3wvh0c85u3r6" path="res://scenes/player.tscn" id="1_xew7u"]
+[ext_resource type="Script" path="res://scripts/Pen.gd" id="3_ncwib"]
+[ext_resource type="Script" path="res://scripts/grav_object.gd" id="5_g4f3j"]
+[ext_resource type="Script" path="res://scripts/mouse_select.gd" id="5_xlr15"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn0kp"]
 size = Vector2(1103, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tcac"]
+size = Vector2(63.5, 65.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kevr1"]
+radius = 4.0
 
 [node name="TestRoom" type="Node2D"]
 
@@ -13,6 +22,7 @@ size = Vector2(1103, 25)
 unique_name_in_owner = true
 
 [node name="Pen" parent="." instance=ExtResource("1_o251a")]
+script = ExtResource("3_ncwib")
 
 [node name="Area2D3" type="StaticBody2D" parent="."]
 position = Vector2(560, 14)
@@ -44,3 +54,24 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
 shape = SubResource("RectangleShape2D_hn0kp")
+
+[node name="Box1" type="CharacterBody2D" parent="."]
+position = Vector2(276, 398)
+script = ExtResource("5_g4f3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box1"]
+shape = SubResource("RectangleShape2D_2tcac")
+
+[node name="Area2D5" type="Area2D" parent="."]
+script = ExtResource("5_xlr15")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
+shape = SubResource("CircleShape2D_kevr1")
+
+[node name="Box2" type="CharacterBody2D" parent="."]
+position = Vector2(383, 334)
+script = ExtResource("5_g4f3j")
+keep_gravity = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box2"]
+shape = SubResource("RectangleShape2D_2tcac")

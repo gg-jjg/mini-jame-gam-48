@@ -40,6 +40,8 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
+	if GameManager.selected_object != self:
+		return
 	var gesture = GameManager.gesture
 	grav_vect = GameManager.gesture_map[gesture]
 	

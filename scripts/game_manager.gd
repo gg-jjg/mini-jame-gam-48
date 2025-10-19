@@ -8,6 +8,8 @@ var gesture_map = {
 	">": Vector2.RIGHT
 }
 
+var selected_object
+
 func set_gesture(val):
 	gesture = val
 	#print("Setting the gesture: ", gesture)
